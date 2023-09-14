@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class BoxMovement : MonoBehaviour
 {
-    
+
     [SerializeField] float moveSpeed = 6f;
     [SerializeField] float rayLength = 1.4f;
     [SerializeField] float rayOffsetX = 0.5f;
@@ -22,6 +22,11 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 targetPosition;
     Vector3 startPosition;
+    int moveDirection;
+    // 0 => Forward
+    // 1 => Back
+    // 2 => Left
+    // 3 => Right
 
     bool moving;
 
@@ -37,53 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
         xAxisOriginA = yOffset + zOffset;
         xAxisOriginB = yOffset - zOffset;
-
-        // Draw Debug Rays
         
-        Debug.DrawLine(
-                zAxisOriginA,
-                zAxisOriginA + Vector3.forward * rayLength,
-                Color.red,
-                Time.deltaTime);
-        Debug.DrawLine(
-                zAxisOriginB,
-                zAxisOriginB + Vector3.forward * rayLength,
-                Color.red,
-                Time.deltaTime);
-
-        Debug.DrawLine(
-                zAxisOriginA,
-                zAxisOriginA + Vector3.back * rayLength,
-                Color.red,
-                Time.deltaTime);
-        Debug.DrawLine(
-                zAxisOriginB,
-                zAxisOriginB + Vector3.back * rayLength,
-                Color.red,
-                Time.deltaTime);
-
-        Debug.DrawLine(
-                xAxisOriginA,
-                xAxisOriginA + Vector3.left * rayLength,
-                Color.red,
-                Time.deltaTime);
-        Debug.DrawLine(
-                xAxisOriginB,
-                xAxisOriginB + Vector3.left * rayLength,
-                Color.red,
-                Time.deltaTime);
-
-        Debug.DrawLine(
-                xAxisOriginA,
-                xAxisOriginA + Vector3.right * rayLength,
-                Color.red,
-                Time.deltaTime);
-        Debug.DrawLine(
-                xAxisOriginB,
-                xAxisOriginB + Vector3.right * rayLength,
-                Color.red,
-                Time.deltaTime);
-
         if (moving) {
             if (Vector3.Distance(startPosition, transform.position) > 1f){
                 transform.position = targetPosition;
@@ -95,31 +54,27 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.W)) {
+        if (moveDirection == 0){
             if (CanMove(Vector3.forward)) {
-                transform.localEulerAngles = new Vector3(0, 0, 0);
                 targetPosition = transform.position + Vector3.forward;
                 startPosition = transform.position;
                 moving = true;
             }
-        } else if (Input.GetKeyDown(KeyCode.S)) {
+        } else if (moveDirection == 1){
             if (CanMove(Vector3.back)) {
-                transform.localEulerAngles = new Vector3(0, 180, 0);
-                targetPosition = transform.position + Vector3.back;
+                targetPosition = transform.position + Vector3.forward;
                 startPosition = transform.position;
                 moving = true;
             }
-        } else if (Input.GetKeyDown(KeyCode.A)) {
+        } else if (moveDirection == 2){
             if (CanMove(Vector3.left)) {
-                transform.localEulerAngles = new Vector3(0, -90, 0);
-                targetPosition = transform.position + Vector3.left;
+                targetPosition = transform.position + Vector3.forward;
                 startPosition = transform.position;
                 moving = true;
             }
-        } else if (Input.GetKeyDown(KeyCode.D)) {
+        } else if (moveDirection == 3){
             if (CanMove(Vector3.right)) {
-                transform.localEulerAngles = new Vector3(0, 90, 0);
-                targetPosition = transform.position + Vector3.right;
+                targetPosition = transform.position + Vector3.forward;
                 startPosition = transform.position;
                 moving = true;
             }
