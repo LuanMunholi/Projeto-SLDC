@@ -10682,7 +10682,7 @@ GameObject:
   - component: {fileID: 1822063340}
   - component: {fileID: 1822063339}
   - component: {fileID: 1822063342}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10698,7 +10698,7 @@ Transform:
   m_GameObject: {fileID: 1822063337}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0.75, z: -2.75}
+  m_LocalPosition: {x: -1, y: 0.75, z: -3.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10784,7 +10784,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1822063337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e70a0e76620f18a41bab8739bceedb74, type: 3}
+  m_Script: {fileID: 11500000, guid: 7802117a3732b2647af9d43002d9f7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
@@ -10794,7 +10794,7 @@ MonoBehaviour:
   rayOffsetZ: 0.5
   obstacle:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &1831376066
 GameObject:
   m_ObjectHideFlags: 0
@@ -11471,7 +11471,6 @@ GameObject:
   - component: {fileID: 1892235469}
   - component: {fileID: 1892235472}
   - component: {fileID: 1892235471}
-  - component: {fileID: 1892235474}
   - component: {fileID: 1892235470}
   - component: {fileID: 1892235473}
   m_Layer: 0
@@ -11594,33 +11593,9 @@ MonoBehaviour:
   obstacle:
     serializedVersion: 2
     m_Bits: 64
---- !u!54 &1892235474
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892235468}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
+  boxMask:
     serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
+    m_Bits: 128
 --- !u!1 &1930610745
 GameObject:
   m_ObjectHideFlags: 0
@@ -11875,7 +11850,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a6ee70f301d72c548a98b9ddd74cf3d4, type: 2}
+  - {fileID: 2100000, guid: 900663c5efaf263479930487119da73a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

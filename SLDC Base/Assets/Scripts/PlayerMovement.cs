@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float rayOffsetY = 0.5f;
     [SerializeField] float rayOffsetZ = 0.5f;
     [SerializeField] LayerMask obstacle = 0;
+    [SerializeField] LayerMask boxMask = 0;
 
     Vector3 xOffset;
     Vector3 yOffset;
@@ -99,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
             if (CanMove(Vector3.forward)) {
                 transform.localEulerAngles = new Vector3(0, 0, 0);
                 targetPosition = transform.position + Vector3.forward;
+                TryPushBox(Vector3.forward);
                 startPosition = transform.position;
                 moving = true;
             }
@@ -106,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
             if (CanMove(Vector3.back)) {
                 transform.localEulerAngles = new Vector3(0, 180, 0);
                 targetPosition = transform.position + Vector3.back;
+                TryPushBox(Vector3.back);
                 startPosition = transform.position;
                 moving = true;
             }
@@ -113,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
             if (CanMove(Vector3.left)) {
                 transform.localEulerAngles = new Vector3(0, -90, 0);
                 targetPosition = transform.position + Vector3.left;
+                TryPushBox(Vector3.left);
                 startPosition = transform.position;
                 moving = true;
             }
@@ -120,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
             if (CanMove(Vector3.right)) {
                 transform.localEulerAngles = new Vector3(0, 90, 0);
                 targetPosition = transform.position + Vector3.right;
+                TryPushBox(Vector3.right);
                 startPosition = transform.position;
                 moving = true;
             }
@@ -137,6 +142,65 @@ public class PlayerMovement : MonoBehaviour
             if (Physics.Raycast(xAxisOriginB, direction, rayLength, obstacle)) return false;
         }
         return true;
+    }
+
+    void TryPushBox(Vector3 direction){
+
+        RaycastHit hit;
+        if (direction.z != 0){
+            if (Physics.Raycast(zAxisOriginA, direction, out hit, rayLength, boxMask)){
+
+                BoxMovement box = hit.collider.GetComponent<BoxMovement>();
+
+                if(box){
+                    box.MoveBox(direction);
+                    Debug.Log("caixa");
+                }
+
+                return;
+
+            }
+
+            if (Physics.Raycast(zAxisOriginB, direction, out hit, rayLength, boxMask)){
+
+                BoxMovement box = hit.collider.GetComponent<BoxMovement>();
+                if(box){
+                    box.MoveBox(direction);
+                    Debug.Log("caixa");
+                }
+                return;
+
+            }
+
+        }
+
+        if (direction.x != 0){
+            if (Physics.Raycast(xAxisOriginA, direction, out hit, rayLength, boxMask)){
+
+                BoxMovement box = hit.collider.GetComponent<BoxMovement>();
+                if(box){
+                    box.MoveBox(direction);
+                    Debug.Log("caixa");
+                }
+                return;
+
+            }
+
+            if (Physics.Raycast(xAxisOriginB, direction, out hit, rayLength, boxMask)){
+
+                BoxMovement box = hit.collider.GetComponent<BoxMovement>();
+                if(box){
+                    box.MoveBox(direction);
+                    Debug.Log("caixa");
+                }
+                return;
+
+            }
+
+        }
+
+        
+        
     }
 
 }
