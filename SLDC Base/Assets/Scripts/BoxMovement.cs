@@ -20,18 +20,13 @@ public class BoxMovement : MonoBehaviour
     Vector3 xAxisOriginA;
     Vector3 xAxisOriginB;
 
+    Vector3 moveDirection;
     Vector3 targetPosition;
     Vector3 startPosition;
-    int moveDirection;
-    // 0 => Forward
-    // 1 => Back
-    // 2 => Left
-    // 3 => Right
 
-    bool moving;
+    bool moving, beingPushed;
 
-    void Update()
-    {
+    void Update(){
 
         yOffset = transform.position + Vector3.up * rayOffsetY;
         zOffset = Vector3.forward * rayOffsetZ;
@@ -42,10 +37,11 @@ public class BoxMovement : MonoBehaviour
 
         xAxisOriginA = yOffset + zOffset;
         xAxisOriginB = yOffset - zOffset;
-        
+
         if (moving) {
             if (Vector3.Distance(startPosition, transform.position) > 1f){
                 transform.position = targetPosition;
+                beingPushed = false;
                 moving = false;
                 return;
             }
@@ -54,35 +50,43 @@ public class BoxMovement : MonoBehaviour
             return;
         }
 
-        if (moveDirection == 0){
-            if (CanMove(Vector3.forward)) {
-                targetPosition = transform.position + Vector3.forward;
-                startPosition = transform.position;
-                moving = true;
-            }
-        } else if (moveDirection == 1){
-            if (CanMove(Vector3.back)) {
-                targetPosition = transform.position + Vector3.forward;
-                startPosition = transform.position;
-                moving = true;
-            }
-        } else if (moveDirection == 2){
-            if (CanMove(Vector3.left)) {
-                targetPosition = transform.position + Vector3.forward;
-                startPosition = transform.position;
-                moving = true;
-            }
-        } else if (moveDirection == 3){
-            if (CanMove(Vector3.right)) {
-                targetPosition = transform.position + Vector3.forward;
-                startPosition = transform.position;
-                moving = true;
+        if (beingPushed){
+            if (Vector3.Dot(moveDirection.normalized, Vector3.forward) > 0f) {
+                if (CanMove(Vector3.forward)) {
+                    targetPosition = transform.position + Vector3.forward;
+                    startPosition = transform.position;
+                    moving = true;
+                }
+            } else if (Vector3.Dot(moveDirection.normalized, Vector3.back) > 0f) {
+                if (CanMove(Vector3.back)) {
+                    targetPosition = transform.position + Vector3.back;
+                    startPosition = transform.position;
+                    moving = true;
+                }
+            } else if (Vector3.Dot(moveDirection.normalized, Vector3.left) > 0f) {
+                if (CanMove(Vector3.left)) {
+                    targetPosition = transform.position + Vector3.left;
+                    startPosition = transform.position;
+                    moving = true;
+                }
+            } else if (Vector3.Dot(moveDirection.normalized, Vector3.right) > 0f) {
+                if (CanMove(Vector3.right)) {
+                    targetPosition = transform.position + Vector3.right;
+                    startPosition = transform.position;
+                    moving = true;
+                }
             }
         }
 
     }
 
-    bool CanMove(Vector3 direction) {
+    public void MoveBox(Vector3 direction){
+        moveDirection = direction;
+        beingPushed = true;
+        return;
+    }
+
+    public bool CanMove(Vector3 direction) {
         if (direction.z != 0) {
             if (Physics.Raycast(zAxisOriginA, direction, rayLength, obstacle)) return false;
             if (Physics.Raycast(zAxisOriginB, direction, rayLength, obstacle)) return false;
