@@ -144,62 +144,21 @@ public class PlayerMovement : MonoBehaviour
         return true;
     }
 
-    void TryPushBox(Vector3 direction){
+    bool TryPushBox(Vector3 direction){
 
         RaycastHit hit;
-        if (direction.z != 0){
-            if (Physics.Raycast(zAxisOriginA, direction, out hit, rayLength, boxMask)){
+        if (Physics.Raycast(transform.position, direction, out hit, rayLength, boxMask)){
 
-                BoxMovement box = hit.collider.GetComponent<BoxMovement>();
+            BoxMovement box = hit.collider.GetComponent<BoxMovement>();
 
-                if(box){
-                    box.MoveBox(direction);
-                    Debug.Log("caixa");
-                }
-
-                return;
-
+            if(box.CanMove(direction)){
+                box.MoveBox(direction);
+                return true;
             }
 
-            if (Physics.Raycast(zAxisOriginB, direction, out hit, rayLength, boxMask)){
+            return false;
 
-                BoxMovement box = hit.collider.GetComponent<BoxMovement>();
-                if(box){
-                    box.MoveBox(direction);
-                    Debug.Log("caixa");
-                }
-                return;
-
-            }
-
-        }
-
-        if (direction.x != 0){
-            if (Physics.Raycast(xAxisOriginA, direction, out hit, rayLength, boxMask)){
-
-                BoxMovement box = hit.collider.GetComponent<BoxMovement>();
-                if(box){
-                    box.MoveBox(direction);
-                    Debug.Log("caixa");
-                }
-                return;
-
-            }
-
-            if (Physics.Raycast(xAxisOriginB, direction, out hit, rayLength, boxMask)){
-
-                BoxMovement box = hit.collider.GetComponent<BoxMovement>();
-                if(box){
-                    box.MoveBox(direction);
-                    Debug.Log("caixa");
-                }
-                return;
-
-            }
-
-        }
-
-        
+        } return false;        
         
     }
 

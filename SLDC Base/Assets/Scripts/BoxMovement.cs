@@ -86,7 +86,7 @@ public class BoxMovement : MonoBehaviour
         return;
     }
 
-    private bool CanMove(Vector3 direction) {
+    public bool CanMove(Vector3 direction) {
         if (direction.z != 0) {
             if (Physics.Raycast(zAxisOriginA, direction, rayLength, obstacle)) return false;
             if (Physics.Raycast(zAxisOriginB, direction, rayLength, obstacle)) return false;
