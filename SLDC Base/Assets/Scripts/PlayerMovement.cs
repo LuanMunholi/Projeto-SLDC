@@ -97,34 +97,30 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.W)) {
-            if (CanMove(Vector3.forward)) {
+            if (CanMove(Vector3.forward) && TryPushBox(Vector3.forward)) {
                 transform.localEulerAngles = new Vector3(0, 0, 0);
                 targetPosition = transform.position + Vector3.forward;
-                TryPushBox(Vector3.forward);
                 startPosition = transform.position;
                 moving = true;
             }
         } else if (Input.GetKeyDown(KeyCode.S)) {
-            if (CanMove(Vector3.back)) {
+            if (CanMove(Vector3.back) && TryPushBox(Vector3.back)) {
                 transform.localEulerAngles = new Vector3(0, 180, 0);
                 targetPosition = transform.position + Vector3.back;
-                TryPushBox(Vector3.back);
                 startPosition = transform.position;
                 moving = true;
             }
-        } else if (Input.GetKeyDown(KeyCode.A)) {
+        } else if (Input.GetKeyDown(KeyCode.A) && TryPushBox(Vector3.left)) {
             if (CanMove(Vector3.left)) {
                 transform.localEulerAngles = new Vector3(0, -90, 0);
                 targetPosition = transform.position + Vector3.left;
-                TryPushBox(Vector3.left);
                 startPosition = transform.position;
                 moving = true;
             }
         } else if (Input.GetKeyDown(KeyCode.D)) {
-            if (CanMove(Vector3.right)) {
+            if (CanMove(Vector3.right) && TryPushBox(Vector3.right)) {
                 transform.localEulerAngles = new Vector3(0, 90, 0);
                 targetPosition = transform.position + Vector3.right;
-                TryPushBox(Vector3.right);
                 startPosition = transform.position;
                 moving = true;
             }
@@ -158,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
 
             return false;
 
-        } return false;        
+        } return true;        
         
     }
 

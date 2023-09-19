@@ -7,18 +7,6 @@ public class BoxMovement : MonoBehaviour
 
     [SerializeField] float moveSpeed = 6f;
     [SerializeField] float rayLength = 1.4f;
-    [SerializeField] float rayOffsetX = 0.5f;
-    [SerializeField] float rayOffsetY = 0.5f;
-    [SerializeField] float rayOffsetZ = 0.5f;
-    [SerializeField] LayerMask obstacle = 0;
-
-    Vector3 xOffset;
-    Vector3 yOffset;
-    Vector3 zOffset;
-    Vector3 zAxisOriginA;
-    Vector3 zAxisOriginB;
-    Vector3 xAxisOriginA;
-    Vector3 xAxisOriginB;
 
     Vector3 moveDirection;
     Vector3 targetPosition;
@@ -27,16 +15,6 @@ public class BoxMovement : MonoBehaviour
     bool moving, beingPushed;
 
     void Update(){
-
-        yOffset = transform.position + Vector3.up * rayOffsetY;
-        zOffset = Vector3.forward * rayOffsetZ;
-        xOffset = Vector3.right * rayOffsetX;
-
-        zAxisOriginA = yOffset + xOffset;
-        zAxisOriginB = yOffset - xOffset;
-
-        xAxisOriginA = yOffset + zOffset;
-        xAxisOriginB = yOffset - zOffset;
 
         if (moving) {
             if (Vector3.Distance(startPosition, transform.position) > 1f){
@@ -87,14 +65,8 @@ public class BoxMovement : MonoBehaviour
     }
 
     public bool CanMove(Vector3 direction) {
-        if (direction.z != 0) {
-            if (Physics.Raycast(zAxisOriginA, direction, rayLength, obstacle)) return false;
-            if (Physics.Raycast(zAxisOriginB, direction, rayLength, obstacle)) return false;
-        }
-        else if (direction.x != 0) {
-            if (Physics.Raycast(xAxisOriginA, direction, rayLength, obstacle)) return false;
-            if (Physics.Raycast(xAxisOriginB, direction, rayLength, obstacle)) return false;
-        }
+        if (Physics.Raycast(transform.position, direction, rayLength)) 
+                return false;
         return true;
     }
 
