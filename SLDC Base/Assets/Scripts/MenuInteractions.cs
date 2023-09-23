@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class MenuInteractions : MonoBehaviour
 {
-    
+
+    public void LoadMainMenu(){
+        SceneManager.LoadScene("Main Menu");
+    }
+   
     public void LoadBaseLevel(){
         SceneManager.LoadScene("Cena Base");
     }
@@ -13,5 +17,5 @@ public class MainMenu : MonoBehaviour
     public void QuitGame(){
         Application.Quit();
     }
- 
+
 }

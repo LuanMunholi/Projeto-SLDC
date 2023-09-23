@@ -565,9 +565,9 @@ Transform:
   m_LocalScale: {x: 0.66, y: 0.66, z: 0.66}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 2410589411440175654}
   - {fileID: 5842399494687194313}
   - {fileID: 8938440075819336007}
-  - {fileID: 2410589411440175654}
   - {fileID: 5902411706227107987}
   - {fileID: 7910658149029392664}
   m_Father: {fileID: 0}
@@ -660,7 +660,7 @@ MonoBehaviour:
   moveSpeed: 6
   rayLength: 1
   rayOffsetX: 0.49
-  rayOffsetY: 0
+  rayOffsetY: -0.5
   rayOffsetZ: 0.49
   obstacle:
     serializedVersion: 2
