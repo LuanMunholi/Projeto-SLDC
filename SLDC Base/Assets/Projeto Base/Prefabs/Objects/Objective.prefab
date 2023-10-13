@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 7770324078757446804}
   - component: {fileID: 540638167511396309}
   - component: {fileID: 4683693638045649443}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Objective
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6385993982990903862}
   - component: {fileID: 595863666084926303}
   - component: {fileID: 4858150399791655309}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
