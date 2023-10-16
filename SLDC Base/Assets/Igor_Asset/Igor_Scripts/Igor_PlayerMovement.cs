@@ -15,19 +15,19 @@ public class Igor_PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                MoveToCell(new Vector3(0,0,1));
+                TryMove(Vector3.forward);
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                MoveToCell(new Vector3(0, 0, -1));
+                TryMove(Vector3.back);
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                MoveToCell(new Vector3(-1, 0, 0));
+                TryMove(Vector3.left);
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                MoveToCell(new Vector3(1, 0, 0));
+                TryMove(Vector3.right);
             }
         }
 
@@ -42,20 +42,40 @@ public class Igor_PlayerMovement : MonoBehaviour
         }
     }
 
-    // Função para mover o jogador para uma célula adjacente na grade
-    private void MoveToCell(Vector3 direction)
+    // Função para tentar mover o jogador para uma célula adjacente na grade
+    private void TryMove(Vector3 direction)
     {
         Vector3 currentPosition = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         Vector3 targetCell = currentPosition + direction;
 
         // Certifique-se de que o alvo esteja dentro dos limites da grid
-        // Substitua os valores 10 e -10 pelos limites da sua grid, se necessário
-        if (targetCell.x >= -10 && targetCell.x <= 10 && targetCell.y >= -10 && targetCell.y <= 10 && targetCell.z >= -10 && targetCell.z <= 10)
+        if (IsCellWithinBounds(targetCell) && !IsCellBlockedByObstacle(targetCell))
         {
-            // Converter Vector2 para Vector3, definindo a componente Z como a mesma do jogador
-            targetPosition = new Vector3(targetCell.x, targetCell.y, targetCell.z);
+            // Se a célula não estiver bloqueada por um obstáculo, mova o jogador para ela
+            targetPosition = targetCell;
             isMoving = true;
         }
     }
 
+    // Função para verificar se uma célula está dentro dos limites da grid
+    private bool IsCellWithinBounds(Vector3 cell)
+    {
+        return cell.x >= -10 && cell.x <= 10 && cell.y >= -10 && cell.y <= 10 && cell.z >= -10 && cell.z <= 10;
+    }
+
+    // Função para verificar se uma célula está bloqueada por um objeto com a tag "obstaculo"
+    private bool IsCellBlockedByObstacle(Vector3 cell)
+    {
+        Collider[] colliders = Physics.OverlapBox(cell, Vector3.one * 0.4f); // Use um tamanho apropriado para o seu jogo
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("obstaculo"))
+            {
+                return true; // A célula está bloqueada por um obstáculo
+            }
+        }
+
+        return false; // A célula não está bloqueada por obstáculos
+    }
 }
