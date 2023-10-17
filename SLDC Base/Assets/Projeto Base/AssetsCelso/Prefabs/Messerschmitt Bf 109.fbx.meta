@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 76b35aebe22ba9742a340dcaad10fd43
+guid: 6e6c6203cdcf9d947a843625a8d78362
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LiveryBody
+    second: {fileID: 2800000, guid: 8b29d6c37fc9b694fbb5a9a517e39bbd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LiveryWings
+    second: {fileID: 2800000, guid: 7ea694612ff8bb4459450521e30a1ff2, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
