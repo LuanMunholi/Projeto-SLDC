@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class mov2 : MonoBehaviour
@@ -22,6 +23,13 @@ public class mov2 : MonoBehaviour
     public VerificaBarril direita;
     public VerificaBarril esquerda;
 
+    public bool podeMoverParaFrente = false;
+    public bool podeMoverParaCostas = false;
+    public bool podeMoverParaDireita = false;
+    public bool podeMoverParaEsquerda = false;
+
+    public bool podeMoverBarril = false;
+
     void Start()
     {
         // Inicialize as posições com base em i e j
@@ -30,25 +38,61 @@ public class mov2 : MonoBehaviour
 
     void Update()
     {
-        moverBarril();
+        //moverBarril();
         int novoI = i;
         int novoJ = j;
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             novoJ = j + 1;
+            podeMoverBarril = false;
+            if (frente.GiveEstado() && PodeMoverPara(i, j + 2))
+            {
+                if (frente.GiveEstado())
+                {
+                    podeMoverParaFrente = true;
+                    podeMoverBarril = true;
+                }
+            }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             novoJ = j - 1;
+            podeMoverBarril = false;
+            if (costas.GiveEstado() && PodeMoverPara(i, j - 2))
+            {
+                if (costas.GiveEstado())
+                {
+                    podeMoverParaCostas = true;
+                    podeMoverBarril = true;
+                }
+            }
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             novoI = i - 1;
+            podeMoverBarril = false;
+            if (esquerda.GiveEstado() && PodeMoverPara(i - 2, j))
+            {
+                if (esquerda.GiveEstado())
+                {
+                    podeMoverParaEsquerda = true;
+                    podeMoverBarril = true;
+                }
+            }
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             novoI = i + 1;
+            podeMoverBarril = false;
+            if (direita.GiveEstado() && PodeMoverPara(i + 2, j))
+            {
+                if (direita.GiveEstado())
+                {
+                    podeMoverParaDireita = true;
+                    podeMoverBarril = true;
+                }
+            }
         }
 
         // Verifica se o jogador pode se mover para a nova posição
@@ -101,30 +145,22 @@ public class mov2 : MonoBehaviour
     {
         transform.position = new Vector3(Mathf.Round(x), Mathf.Round(y), Mathf.Round(z));
     }
-
     
-    void moverBarril()
+    public bool giveFrente()
     {
-        if (frente.GiveEstado() && PodeMoverPara(i, j + 2))
-        {
-            Debug.Log("pode mover barril");
-        }
-        if (costas.GiveEstado() && PodeMoverPara(i, j - 2))
-        {
-            Debug.Log("pode mover barril");
-        }
-        if (direita.GiveEstado() && PodeMoverPara(i + 2, j))
-        {
-            Debug.Log("pode mover barril");
-        }
-        if (esquerda.GiveEstado() && PodeMoverPara(i - 2, j))
-        {
-            Debug.Log("pode mover barril");
-        }
-
+        return podeMoverParaFrente;
     }
-    
-
-
+    public bool giveCostas()
+    {
+        return podeMoverParaCostas;
+    }
+    public bool giveDireita()
+    {
+        return podeMoverParaDireita;
+    }
+    public bool giveEsquerda()
+    {
+        return podeMoverParaEsquerda;
+    }
 
 }

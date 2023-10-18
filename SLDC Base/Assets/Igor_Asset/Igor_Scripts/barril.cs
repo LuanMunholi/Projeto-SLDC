@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class barril : MonoBehaviour
 {
-    public GameObject jogador;
+    public mov2 jogador;
 
     public GameObject[] posicoesvalidas;
 
@@ -13,11 +13,11 @@ public class barril : MonoBehaviour
     public VerificaPlayer direita;
     public VerificaPlayer esquerda;
 
-    private GameObject posicaoAtual;
-    private GameObject posicaoFrente;
-    private GameObject posicaoTras;
-    private GameObject posicaoDireita;
-    private GameObject posicaoEsquerda;
+    public GameObject posicaoAtual;
+    public GameObject posicaoFrente;
+    public GameObject posicaoTras;
+    public GameObject posicaoDireita;
+    public GameObject posicaoEsquerda;
 
     public int i = 2;
     public int j = 2;
@@ -26,28 +26,55 @@ public class barril : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        AtualizarPosicoes();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        AtualizarPosicoes();
         if (frente.GiveEstado() && PodeMoverPara(i,j-1)) // se esta na frente tem q verificar as costas
         {
-            Debug.Log("player esta na frente");
+            if (jogador.giveCostas() && jogador.podeMoverBarril)
+            {
+                j--;
+                AtualizarPosicoes();
+                movetwo(i, 2, j);
+                jogador.podeMoverParaCostas = false;
+            }
+
+
         }
         if (costas.GiveEstado() && PodeMoverPara(i, j + 1))
         {
-            Debug.Log("player esta na costas");
+            if (jogador.giveFrente())
+            {
+                j++;
+                AtualizarPosicoes();
+                movetwo(i, 2, j);
+                jogador.podeMoverParaFrente = false;
+            }
         }
         if (direita.GiveEstado() && PodeMoverPara(i - 1, j))
         {
-            Debug.Log("player esta na direita");
+            if (jogador.giveEsquerda())
+            {
+                i--;
+                AtualizarPosicoes();
+                movetwo(i, 2, j);
+                jogador.podeMoverParaEsquerda = false;
+            }
         }
         if (esquerda.GiveEstado() && PodeMoverPara(i + 1, j))
         {
-            Debug.Log("player esta na esquerda");
+            if (jogador.giveDireita())
+            {
+                i++;
+                AtualizarPosicoes();
+                movetwo(i, 2, j);
+                jogador.podeMoverParaDireita = false;
+            }
         }
     }
 
