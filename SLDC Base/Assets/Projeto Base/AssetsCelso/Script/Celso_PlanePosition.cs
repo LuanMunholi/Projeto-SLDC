@@ -11,7 +11,8 @@ public class Celso_PlanePosition : MonoBehaviour
     [SerializeField] private GameObject badPlane;
     private GameObject _badPlaneInstanced;
     private GameObject _goodPlaneInstanced;
-    private bool _isMoving = false;
+    private bool _isMoving ;
+    
 
     public static event Action OnAirplaneMoved;
 
@@ -24,16 +25,27 @@ public class Celso_PlanePosition : MonoBehaviour
         PlaneInstatiate();
     }
 
-    private void Update()
+     void Update()
+    
     {
+
         if (Input.GetKeyDown(KeyCode.D))
         {
+            _isMoving = true;
+        }
+
+    }
+
+     void FixedUpdate()
+    {
+        if (_isMoving)
+        {
             _goodPlaneInstanced.transform.position += new Vector3(  1,0,0);
-            
             OnAirplaneMoved?.Invoke();
+            _isMoving = false;
         }
     }
-    
+
 
     private void PlaneInstatiate()
     {

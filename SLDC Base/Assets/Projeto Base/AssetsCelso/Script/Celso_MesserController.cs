@@ -17,7 +17,6 @@ public class Celso_MesserController : MonoBehaviour
 
     void OnEnable()
     {
-        _movementCounter++;
         Celso_PlanePosition.OnAirplaneMoved += MoveThisObject ;
         Debug.Log(GetMoveCount().ToString());
     }
@@ -29,6 +28,7 @@ public class Celso_MesserController : MonoBehaviour
 
     private void MoveThisObject()
     {
+        _movementCounter++;
         _changePosition[_movementCounter++]();
     }
 
@@ -39,9 +39,16 @@ public class Celso_MesserController : MonoBehaviour
         {
             _changePosition.Add(MoveX);
             _changePosition.Add(MoveY);
+            _changePosition.Add(MoveZ);
+            _changePosition.Add(MoveX);
+            _changePosition.Add(MoveZ);
             _changePosition.Add(MoveY);
             _changePosition.Add(MoveY);
+            _changePosition.Add(MoveX);
             _changePosition.Add(MoveY);
+            _changePosition.Add(MoveZ);
+            _changePosition.Add(MoveX);
+            _changePosition.Add(MoveZ);
             _changePosition.Add(MoveY);
             _changePosition.Add(MoveY);
         }
