@@ -247,6 +247,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Projeto Base/AssetsCelso/Script/Celso_MesserController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Projeto Base/AssetsCelso/Script/Celso_Definitions.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="2Wrfb3H8HGingmG6MxcZ0HH0z07" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -254,6 +258,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -296,7 +302,11 @@
       <workItem from="1697573782310" duration="768000" />
       <workItem from="1697582486836" duration="2754000" />
       <workItem from="1697626589969" duration="10717000" />
-      <workItem from="1697645911551" duration="8319000" />
+      <workItem from="1697645911551" duration="15215000" />
+      <workItem from="1697733737763" duration="3602000" />
+      <workItem from="1697744984997" duration="2953000" />
+      <workItem from="1697811438503" duration="9539000" />
+      <workItem from="1697883626988" duration="1251000" />
     </task>
     <servers />
   </component>
