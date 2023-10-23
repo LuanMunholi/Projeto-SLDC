@@ -14,4 +14,7 @@ public static class Celso_Definitions
         _mapReferenceDeterminant[0, 0] = 1;
         _mapReferenceDeterminant[0, 1] = 2;
     }
+
+
+    
 }

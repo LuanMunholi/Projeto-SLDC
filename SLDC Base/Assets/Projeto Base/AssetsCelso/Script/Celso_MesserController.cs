@@ -9,29 +9,56 @@ public class Celso_MesserController : MonoBehaviour
     delegate void MovementLevel();
     private int _movementCounter = 0;
     private List<MovementLevel> _changePosition = new List<MovementLevel>();
+    private Rigidbody _rigidbodyMesser;
+    private bool _isMoving = false;
 
-    private void Start()
+    private Vector3 _oldPosition = Vector3.zero;
+    private Vector3 _movementMagnitude = Vector3.zero;
+
+    private void Awake()
     {
+        _rigidbodyMesser = GetComponent<Rigidbody>();
         CreateLevel();
     }
+    
 
     void OnEnable()
     {
-        Celso_PlanePosition.OnAirplaneMoved += MoveThisObject ;
+        Celso_SpitFireMovement.OnAirplaneMoved += MoveThisObject ;
         Debug.Log(GetMoveCount().ToString());
     }
     
     void OnDisable()
     {
-        Celso_PlanePosition.OnAirplaneMoved -= MoveThisObject;
+        Celso_SpitFireMovement.OnAirplaneMoved -= MoveThisObject;
+        _rigidbodyMesser.AddForce(new Vector3(0,0,0),ForceMode.VelocityChange);
     }
 
     private void MoveThisObject()
-    {
+    {       
+        _isMoving = true;
         _movementCounter++;
-        _changePosition[_movementCounter++]();
     }
 
+    private void FixedUpdate()
+    {
+        if (_isMoving == false)
+        {
+            _oldPosition = _rigidbodyMesser.position;
+        }
+        
+        if (_isMoving == true)
+        {
+            _movementMagnitude = _rigidbodyMesser.position - _oldPosition; 
+            _changePosition[_movementCounter]();
+        } 
+        if (_movementMagnitude.magnitude >= 1.0f)
+        {
+            _isMoving = false;
+            _rigidbodyMesser.velocity = Vector3.zero;
+        }
+        
+    }
 
     void CreateLevel()
     {
@@ -56,21 +83,20 @@ public class Celso_MesserController : MonoBehaviour
 
     void  MoveZ()
     {
-        transform.position +=  Vector3.back;
+        _rigidbodyMesser.AddForce(new Vector3(0,0,1),ForceMode.Impulse);
     }
     void MoveX()
     {
-        transform.position += Vector3.up;
+        _rigidbodyMesser.AddForce(new Vector3(1,0,0),ForceMode.Impulse);
     }
     
     void MoveY()
     {
-        transform.position +=Vector3.right;
+        _rigidbodyMesser.AddForce(new Vector3(0,1,0),ForceMode.Impulse);
     }
     
     public int GetMoveCount()
     {
         return _movementCounter;
     }
-    
 }
