@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Igor_VerificaMalha : MonoBehaviour
+public class IF_VerificaMalha : MonoBehaviour
 {
     public bool ocupada = false; // Indica se a célula está ocupada
     public bool barril = false;

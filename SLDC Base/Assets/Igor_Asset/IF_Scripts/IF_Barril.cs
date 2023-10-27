@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class barril : MonoBehaviour
+public class IF_Barril : MonoBehaviour
 {
-    public mov2 jogador;
+    public IF_Movimentacao jogador;
+
+    public IF_PopulaLista listapopulada;
 
     public GameObject[] posicoesvalidas;
 
-    public VerificaPlayer frente;
-    public VerificaPlayer costas;
-    public VerificaPlayer direita;
-    public VerificaPlayer esquerda;
+    public IF_VerificaPlayer frente;
+    public IF_VerificaPlayer costas;
+    public IF_VerificaPlayer direita;
+    public IF_VerificaPlayer esquerda;
 
     public GameObject posicaoAtual;
     public GameObject posicaoFrente;
@@ -26,6 +28,7 @@ public class barril : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        posicoesvalidas = listapopulada.populaposicao.ToArray();
         AtualizarPosicoes();
 
     }
@@ -34,8 +37,10 @@ public class barril : MonoBehaviour
     void Update()
     {
         AtualizarPosicoes();
+        // verifico se tem um Player na frente, verifico se posso mover para tras
         if (frente.GiveEstado() && PodeMoverPara(i,j-1)) // se esta na frente tem q verificar as costas
         {
+            //verifico se o player pode mover para as costas e se o jogador pode mover o barril 
             if (jogador.giveCostas() && jogador.podeMoverBarril)
             {
                 j--;
@@ -107,7 +112,7 @@ public class barril : MonoBehaviour
         if (index != -1)
         {
             // Obtém o componente Igor_VerificaMalha da célula da grade
-            Igor_VerificaMalha malha = posicoesvalidas[index].GetComponent<Igor_VerificaMalha>();
+            IF_VerificaMalha malha = posicoesvalidas[index].GetComponent<IF_VerificaMalha>();
             return !malha.GiveEstadoOcupado(); // Retorna verdadeiro se a célula não estiver ocupada
         }
         return false; // Não encontrou a posição

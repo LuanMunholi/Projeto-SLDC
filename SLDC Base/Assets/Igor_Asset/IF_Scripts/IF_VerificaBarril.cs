@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VerificaBarril : MonoBehaviour
+public class IF_VerificaBarril : MonoBehaviour
 {
     public bool temBarril = false;
 
@@ -16,7 +16,7 @@ public class VerificaBarril : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Barril"))
         {
             temBarril = false;
         }

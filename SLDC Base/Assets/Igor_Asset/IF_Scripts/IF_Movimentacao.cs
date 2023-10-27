@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class mov2 : MonoBehaviour
+public class IF_Movimentacao : MonoBehaviour
 {
     //public GameObject jogador;
 
     public int i = 2;
     public int j = 2;
+
+    public IF_PopulaLista listapopulada;
 
     public GameObject[] posicoesvalidas;  // Array de posições válidas
 
@@ -18,10 +20,10 @@ public class mov2 : MonoBehaviour
     private GameObject posicaoDireita;
     private GameObject posicaoEsquerda;
 
-    public VerificaBarril frente;
-    public VerificaBarril costas;
-    public VerificaBarril direita;
-    public VerificaBarril esquerda;
+    public IF_VerificaBarril frente;
+    public IF_VerificaBarril costas;
+    public IF_VerificaBarril direita;
+    public IF_VerificaBarril esquerda;
 
     public bool podeMoverParaFrente = false;
     public bool podeMoverParaCostas = false;
@@ -32,6 +34,7 @@ public class mov2 : MonoBehaviour
 
     void Start()
     {
+        posicoesvalidas = listapopulada.populaposicao.ToArray();
         // Inicialize as posições com base em i e j
         AtualizarPosicoes();
     }
@@ -45,52 +48,69 @@ public class mov2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             novoJ = j + 1;
-            podeMoverBarril = false;
+            //podeMoverBarril = false;
+
             if (frente.GiveEstado() && PodeMoverPara(i, j + 2))
             {
                 if (frente.GiveEstado())
                 {
                     podeMoverParaFrente = true;
-                    podeMoverBarril = true;
+                    //podeMoverBarril = true;
+                }
+                else
+                {
+                    podeMoverParaFrente = false;
                 }
             }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             novoJ = j - 1;
-            podeMoverBarril = false;
+            //podeMoverBarril = false;
             if (costas.GiveEstado() && PodeMoverPara(i, j - 2))
             {
                 if (costas.GiveEstado())
                 {
                     podeMoverParaCostas = true;
-                    podeMoverBarril = true;
+                    //podeMoverBarril = true;
+                }
+                else
+                {
+                    podeMoverParaCostas = false;
                 }
             }
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             novoI = i - 1;
-            podeMoverBarril = false;
+            //podeMoverBarril = false;
             if (esquerda.GiveEstado() && PodeMoverPara(i - 2, j))
             {
                 if (esquerda.GiveEstado())
                 {
                     podeMoverParaEsquerda = true;
-                    podeMoverBarril = true;
+                    //podeMoverBarril = true;
+                }
+                else
+                {
+                    podeMoverParaEsquerda = false;
                 }
             }
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             novoI = i + 1;
-            podeMoverBarril = false;
+            //podeMoverBarril = false;
             if (direita.GiveEstado() && PodeMoverPara(i + 2, j))
             {
                 if (direita.GiveEstado())
                 {
                     podeMoverParaDireita = true;
-                    podeMoverBarril = true;
+                    //podeMoverBarril = true;
+                }
+                else
+                {
+                    podeMoverParaDireita = false;
                 }
             }
         }
@@ -103,6 +123,15 @@ public class mov2 : MonoBehaviour
             AtualizarPosicoes();
             moverPara(i, 2, j);
         }
+
+        if (frente.GiveEstado() || costas.GiveEstado() || direita.GiveEstado() || esquerda.GiveEstado()  )
+        {
+            podeMoverBarril = true;
+        }
+        else
+        {
+            podeMoverBarril = false;
+        }
     }
 
     // Verifica se o jogador pode se mover para uma posição
@@ -112,7 +141,7 @@ public class mov2 : MonoBehaviour
         if (index != -1)
         {
             // Obtém o componente Igor_VerificaMalha da célula da grade
-            Igor_VerificaMalha malha = posicoesvalidas[index].GetComponent<Igor_VerificaMalha>();
+            IF_VerificaMalha malha = posicoesvalidas[index].GetComponent<IF_VerificaMalha>();
             return !malha.GiveEstadoOcupado(); // Retorna verdadeiro se a célula não estiver ocupada
         }
         return false; // Não encontrou a posição

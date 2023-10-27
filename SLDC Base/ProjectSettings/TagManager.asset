@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Barril
+  - PosicaoValidada
+  - coluna
+  - linha
   layers:
   - Default
   - TransparentFX

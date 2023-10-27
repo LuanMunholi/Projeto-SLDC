@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VerificaPlayer : MonoBehaviour
+public class IF_VerificaPlayer : MonoBehaviour
 {
     public bool temPlayer = false;
     public GameObject barril;
@@ -30,11 +30,6 @@ public class VerificaPlayer : MonoBehaviour
     public bool GiveEstado()
     {
         return temPlayer;
-    }
-
-    void MoverBarrilPara(int x, int y, int z)
-    {
-        transform.position = new Vector3(Mathf.Round(x), Mathf.Round(y), Mathf.Round(z));
     }
 }
 
