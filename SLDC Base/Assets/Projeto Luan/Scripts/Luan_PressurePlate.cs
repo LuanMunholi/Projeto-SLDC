@@ -19,9 +19,14 @@ public class Luan_PressurePlate : MonoBehaviour
         {
             isLowering = true;
             targetPosition = transform.position - new Vector3(0f, lowerAmount, 0f);
-            objectToDeactivate.SetActive(false);
+            Invoke("deactivateObject", 1f);
             StartCoroutine(SmoothLower());
         }
+    }
+
+    private void deactivateObject()
+    {
+        objectToDeactivate.SetActive(false);
     }
 
     private IEnumerator SmoothLower()

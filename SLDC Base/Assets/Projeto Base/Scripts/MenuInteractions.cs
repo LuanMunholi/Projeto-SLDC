@@ -18,4 +18,8 @@ public class MenuInteractions : MonoBehaviour
         Application.Quit();
     }
 
+    public void LoadEgyptLevel(){
+        SceneManager.LoadScene("Egyptian Temple");
+    }
+
 }

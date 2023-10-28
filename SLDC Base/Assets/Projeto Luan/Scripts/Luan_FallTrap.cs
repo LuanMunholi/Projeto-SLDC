@@ -30,7 +30,7 @@ public class Luan_FallTrap : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !steppedOn)
+        if (other.gameObject.CompareTag("Player"))
         {
             steppedOn = true;
         }

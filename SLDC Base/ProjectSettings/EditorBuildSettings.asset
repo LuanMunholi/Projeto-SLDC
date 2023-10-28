@@ -8,10 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Projeto Base/Scenes/Main Menu.unity
     guid: 40b5c9d0fbf1485488c471370f2226c8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level Selection.unity
     guid: fd9ccaa7784b62b49bdecb059270a0d5
   - enabled: 1
     path: Assets/Projeto Base/Scenes/Cena Base.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Projeto Luan/Scenes/Egyptian Temple.unity
+    guid: aeb93a16d5311344b9f01fa1f4c389ec
+  - enabled: 1
+    path: Assets/Projeto Luan/Scenes/Pyramid Entrance.unity
+    guid: 11dff79e50d39ee46b77cbfe211b1769
   m_configObjects: {}
