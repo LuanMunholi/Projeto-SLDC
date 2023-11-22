@@ -96,28 +96,28 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.W)) {
+        if (Input.GetKeyDown(KeyCode.A)) {
             if (CanMove(Vector3.forward) && TryPushBox(Vector3.forward)) {
                 transform.localEulerAngles = new Vector3(0, 0, 0);
                 targetPosition = transform.position + Vector3.forward;
                 startPosition = transform.position;
                 moving = true;
             }
-        } else if (Input.GetKeyDown(KeyCode.S)) {
+        } else if (Input.GetKeyDown(KeyCode.D)) {
             if (CanMove(Vector3.back) && TryPushBox(Vector3.back)) {
                 transform.localEulerAngles = new Vector3(0, 180, 0);
                 targetPosition = transform.position + Vector3.back;
                 startPosition = transform.position;
                 moving = true;
             }
-        } else if (Input.GetKeyDown(KeyCode.A) && TryPushBox(Vector3.left)) {
+        } else if (Input.GetKeyDown(KeyCode.S) && TryPushBox(Vector3.left)) {
             if (CanMove(Vector3.left)) {
                 transform.localEulerAngles = new Vector3(0, -90, 0);
                 targetPosition = transform.position + Vector3.left;
                 startPosition = transform.position;
                 moving = true;
             }
-        } else if (Input.GetKeyDown(KeyCode.D)) {
+        } else if (Input.GetKeyDown(KeyCode.W)) {
             if (CanMove(Vector3.right) && TryPushBox(Vector3.right)) {
                 transform.localEulerAngles = new Vector3(0, 90, 0);
                 targetPosition = transform.position + Vector3.right;
