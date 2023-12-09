@@ -38,6 +38,6 @@ public class InstantiateGrid : MonoBehaviour
             }
         }
         customGrid.transform.parent = transform;
-
+        customGrid.transform.localPosition = new Vector3(0, 0, 0);
     }
 }
